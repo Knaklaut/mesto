@@ -1,0 +1,10 @@
+.photobook {
+  max-width: 880px;
+  margin: 51px auto 66px;
+}
+
+@media screen and (max-width: 620px) {
+  .photobook {
+    margin-bottom: 48px;
+  }
+}
