@@ -5,7 +5,7 @@
 * обновлять данные о пользователе (имя и профессия) в шапке профиля;
 * загружать фотографии в фотоальбом.
 
-[Ссылка](https://knaklaut.github.io/russian-travel/index.html) на сайт на GitHub Pages.
+[Ссылка](https://knaklaut.github.io/mesto/index.html) на сайт на GitHub Pages.
 
 ## Функциональность
 При разработке сайта использованы следующие технологии:
