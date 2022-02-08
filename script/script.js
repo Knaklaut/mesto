@@ -1,15 +1,15 @@
 // Определить переменные для элементов профиля
-let profileContainer = document.querySelector('.profile');
-let editButton = profileContainer.querySelector('.profile__button_edit');
-let profileName = profileContainer.querySelector('.profile__title');
-let profileAbout = profileContainer.querySelector('.profile__subtitle');
+const profileContainer = document.querySelector('.profile');
+const editButton = profileContainer.querySelector('.profile__button_edit');
+const profileName = profileContainer.querySelector('.profile__title');
+const profileAbout = profileContainer.querySelector('.profile__subtitle');
 
 // Определить переменные для элементов всплывающего окна
-let popUp = document.querySelector('.popup');
-let closeButton = popUp.querySelector('.popup__close');
-let saveButton = popUp.querySelector('.popup__save');
-let nameInput = popUp.querySelector('.popup__item_el_name');
-let aboutInput = popUp.querySelector('.popup__item_el_about');
+const popUp = document.querySelector('.popup');
+const closeButton = popUp.querySelector('.popup__close');
+const saveButton = popUp.querySelector('.popup__save');
+const nameInput = popUp.querySelector('.popup__item_el_name');
+const aboutInput = popUp.querySelector('.popup__item_el_about');
 
 // Создать функцию открытия всплывающего окна при клике по кнопке редактирования
 function openPopUp(){
