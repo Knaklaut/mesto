@@ -7,7 +7,7 @@
 }
 
 .header__logo:hover {
-  opacity: 0;
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 890px) {

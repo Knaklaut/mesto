@@ -1,6 +1,7 @@
 .profile__button_add {
   width: 150px;
   height: 50px;
+  margin-left: 20px;
   background-image: url('../../../../images/button-add.svg');
   background-size: 22px;
   border: 2px solid #fff;
@@ -11,5 +12,6 @@
   .profile__button_add {
     width: 282px;
     background-size: 17px;
+    margin-left: 0;
   }
 }
