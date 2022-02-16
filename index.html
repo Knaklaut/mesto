@@ -17,73 +17,75 @@
         <div class="profile__info">
           <div class="profile__edit">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__button profile__button_edit" type="button"></button>
+            <button class="profile__button profile__button_type_edit" type="button"></button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button class="profile__button profile__button_add" type="button"></button>
+        <button class="profile__button profile__button_type_add" type="button"></button>
       </section>
       <section class="photobook">
-        <ul class="elements">
-          <li class="elements__element">
-            <img class="elements__photo" src="images/photo-karachaevsk.jpg" alt="Карачаевск">
-            <div class="elements__description">
-              <p class="elements__place">Карачаевск</p>
-              <button class="elements__button" type="button"></button>
+        <ul class="photobook__elements">
+          <li class="photobook__element">
+            <img class="photobook__photo" src="images/photo-karachaevsk.jpg" alt="Карачаевск">
+            <div class="photobook__description">
+              <h2 class="photobook__place">Карачаевск</h2>
+              <button class="photobook__button" type="button"></button>
             </div>
           </li>
-          <li class="elements__element">
-            <img class="elements__photo" src="images/photo-elbrus.jpg" alt="Гора Эльбрус">
-            <div class="elements__description">
-              <p class="elements__place">Гора Эльбрус</p>
-              <button class="elements__button" type="button"></button>
+          <li class="photobook__element">
+            <img class="photobook__photo" src="images/photo-elbrus.jpg" alt="Гора Эльбрус">
+            <div class="photobook__description">
+              <h2 class="photobook__place">Гора Эльбрус</h2>
+              <button class="photobook__button" type="button"></button>
             </div>
           </li>
-          <li class="elements__element">
-            <img class="elements__photo" src="images/photo-dombai.jpg" alt="Домбай">
-            <div class="elements__description">
-              <p class="elements__place">Домбай</p>
-              <button class="elements__button" type="button"></button>
+          <li class="photobook__element">
+            <img class="photobook__photo" src="images/photo-dombai.jpg" alt="Домбай">
+            <div class="photobook__description">
+              <h2 class="photobook__place">Домбай</h2>
+              <button class="photobook__button" type="button"></button>
             </div>
           </li>
-          <li class="elements__element">
-            <img class="elements__photo" src="images/photo-elbrus.jpg" alt="Гора Эльбрус">
-            <div class="elements__description">
-              <p class="elements__place">Гора Эльбрус</p>
-              <button class="elements__button" type="button"></button>
+          <li class="photobook__element">
+            <img class="photobook__photo" src="images/photo-elbrus.jpg" alt="Гора Эльбрус">
+            <div class="photobook__description">
+              <h2 class="photobook__place">Гора Эльбрус</h2>
+              <button class="photobook__button" type="button"></button>
             </div>
           </li>
-          <li class="elements__element">
-            <img class="elements__photo" src="images/photo-dombai.jpg" alt="Домбай">
-            <div class="elements__description">
-              <p class="elements__place">Домбай</p>
-              <button class="elements__button" type="button"></button>
+          <li class="photobook__element">
+            <img class="photobook__photo" src="images/photo-dombai.jpg" alt="Домбай">
+            <div class="photobook__description">
+              <h2 class="photobook__place">Домбай</h2>
+              <button class="photobook__button" type="button"></button>
             </div>
           </li>
-          <li class="elements__element">
-            <img class="elements__photo" src="images/photo-karachaevsk.jpg" alt="Карачаево-Черкессия">
-            <div class="elements__description">
-              <p class="elements__place">Карачаево-Черкессия</p>
-              <button class="elements__button" type="button"></button>
+          <li class="photobook__element">
+            <img class="photobook__photo" src="images/photo-karachaevsk.jpg" alt="Карачаево-Черкессия">
+            <div class="photobook__description">
+              <h2 class="photobook__place">Карачаево-Черкессия</h2>
+              <button class="photobook__button" type="button"></button>
             </div>
           </li>
         </ul>
       </section>
-      <footer class="footer">
-        <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
-      </footer>
-      <div class="popup">
-        <form class="popup__container">
-          <h2 class="popup__heading">Редактировать профиль</h2>
-          <fieldset class="popup__input-container">
-            <input type="text" class="popup__item popup__item_el_name" id="title" name="title" required>
-            <input type="text" class="popup__item popup__item_el_about" id="subtitle" name="subtitle" required>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+    </footer>
+    <div class="popup">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <form class="popup__form" name="user-info">
+          <fieldset class="popup__input-area">
+            <input type="text" class="popup__item popup__item_el_name" id="title" name="user-name" placeholder="Введите ваше имя" required>
+            <input type="text" class="popup__item popup__item_el_about" id="subtitle" name="user-about" placeholder="Введите вашу профессию" required>
           </fieldset>
           <button class="popup__save" type="submit" value="submit">Сохранить</button>
-          <button class="popup__close" type="reset"></button>
         </form>
       </div>
-    </main>
+    </div>
   </div>
   <script src="./scripts/index.js"></script>
 </body>

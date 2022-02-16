@@ -1,7 +1,7 @@
-.profile__button_add {
+.profile__button_type_add {
   width: 150px;
   height: 50px;
-  margin-left: 20px;
+  margin-left: 15px;
   background-image: url('../../../../images/button-add.svg');
   background-size: 22px;
   border: 2px solid #fff;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 620px) {
-  .profile__button_add {
+  .profile__button_type_add {
     width: 282px;
     background-size: 17px;
     margin-left: 0;

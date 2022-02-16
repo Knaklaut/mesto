@@ -1,12 +1,12 @@
 // Определить переменные для элементов профиля
 const profileContainer = document.querySelector('.profile');
-const editButton = profileContainer.querySelector('.profile__button_edit');
+const editButton = profileContainer.querySelector('.profile__button_type_edit');
 const profileName = profileContainer.querySelector('.profile__title');
 const profileAbout = profileContainer.querySelector('.profile__subtitle');
 
 // Определить переменные для элементов всплывающего окна
 const popUp = document.querySelector('.popup');
-const form = popUp.querySelector('.popup__container');
+const form = popUp.querySelector('.popup__form');
 const closeButton = popUp.querySelector('.popup__close');
 const nameInput = popUp.querySelector('.popup__item_el_name');
 const aboutInput = popUp.querySelector('.popup__item_el_about');

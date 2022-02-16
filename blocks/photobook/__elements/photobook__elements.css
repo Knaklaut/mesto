@@ -1,4 +1,4 @@
-.elements {
+.photobook__elements {
   width: 100%;
   margin: 0 auto;
   list-style: none;
@@ -11,13 +11,13 @@
 }
 
 @media screen and (max-width: 890px) {
-  .elements {
+  .photobook__elements {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media screen and (max-width: 620px) {
-  .elements {
+  .photobook__elements {
     grid-template-columns: 1fr;
   }
 }
