@@ -22,62 +22,35 @@
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
         <button class="profile__button profile__button_type_add" type="button"></button>
-      </section>
+    </section>
       <section class="photobook">
         <ul class="photobook__elements">
-          <li class="photobook__element">
-            <img class="photobook__photo" src="images/photo-karachaevsk.jpg" alt="Карачаевск">
-            <div class="photobook__description">
-              <h2 class="photobook__place">Карачаевск</h2>
-              <button class="photobook__button" type="button"></button>
-            </div>
-          </li>
-          <li class="photobook__element">
-            <img class="photobook__photo" src="images/photo-elbrus.jpg" alt="Гора Эльбрус">
-            <div class="photobook__description">
-              <h2 class="photobook__place">Гора Эльбрус</h2>
-              <button class="photobook__button" type="button"></button>
-            </div>
-          </li>
-          <li class="photobook__element">
-            <img class="photobook__photo" src="images/photo-dombai.jpg" alt="Домбай">
-            <div class="photobook__description">
-              <h2 class="photobook__place">Домбай</h2>
-              <button class="photobook__button" type="button"></button>
-            </div>
-          </li>
-          <li class="photobook__element">
-            <img class="photobook__photo" src="images/photo-elbrus.jpg" alt="Гора Эльбрус">
-            <div class="photobook__description">
-              <h2 class="photobook__place">Гора Эльбрус</h2>
-              <button class="photobook__button" type="button"></button>
-            </div>
-          </li>
-          <li class="photobook__element">
-            <img class="photobook__photo" src="images/photo-dombai.jpg" alt="Домбай">
-            <div class="photobook__description">
-              <h2 class="photobook__place">Домбай</h2>
-              <button class="photobook__button" type="button"></button>
-            </div>
-          </li>
-          <li class="photobook__element">
-            <img class="photobook__photo" src="images/photo-karachaevsk.jpg" alt="Карачаево-Черкессия">
-            <div class="photobook__description">
-              <h2 class="photobook__place">Карачаево-Черкессия</h2>
-              <button class="photobook__button" type="button"></button>
-            </div>
-          </li>
+
+          <!--Шаблон для заполнения фотоальбома через функции JavaScript-->
+          <template id="photobook__element">
+            <li class="photobook__element">
+              <img class="photobook__photo" src="" alt="">
+              <button class="photobook__button-delete" type="button"></button>
+              <div class="photobook__description">
+                <h2 class="photobook__place"></h2>
+                <button class="photobook__button-like" type="button"></button>
+              </div>
+            </li>
+          </template>
+
         </ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <div class="popup">
+
+    <!--Всплывающее окно с формой для редактирования пользовательских данных-->
+    <div class="popup popup_function_user-info">
       <div class="popup__container">
-        <button class="popup__close" type="button"></button>
+        <button class="popup__close popup__close_function_edit-info" type="button"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <form class="popup__form" name="user-info">
+        <form class="popup__form popup__form_function_edit-info" name="user-info">
           <fieldset class="popup__input-area">
             <input type="text" class="popup__item popup__item_el_name" id="title" name="user-name" placeholder="Введите ваше имя" required>
             <input type="text" class="popup__item popup__item_el_about" id="subtitle" name="user-about" placeholder="Введите вашу профессию" required>
@@ -86,6 +59,31 @@
         </form>
       </div>
     </div>
+
+    <!--Всплывающее окно с формой для добавления фотографий-->
+    <div class="popup popup_function_add-place">
+      <div class="popup__container">
+        <button class="popup__close popup__close_function_add-place" type="button"></button>
+        <h2 class="popup__heading">Новое место</h2>
+        <form class="popup__form popup__form_function_add-place" name="new-place-info">
+          <fieldset class="popup__input-area">
+            <input type="text" class="popup__item popup__item_el_place" id="place" name="place-name" placeholder="Название" required>
+            <input type="text" class="popup__item popup__item_el_link" id="link" name="photo-link" placeholder="Ссылка на картинку" required>
+          </fieldset>
+          <button class="popup__save" type="submit" value="submit">Создать</button>
+        </form>
+      </div>
+    </div>
+
+    <!--Всплывающее окно для просмотра отдельных фотографий-->
+    <div class="popup popup_function_increase-photo">
+      <div class="popup__elements">
+        <button class="popup__close popup__close_function_increase-photo" type="button"></button>
+        <img class="popup__photo" src="" alt="">
+        <h2 class="popup__title"></h2>
+      </div>
+    </div>
+
   </div>
   <script src="./scripts/index.js"></script>
 </body>

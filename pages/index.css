@@ -18,7 +18,9 @@
 @import url(../blocks/photobook/__photo/photobook__photo.css);
 @import url(../blocks/photobook/__description/photobook__description.css);
 @import url(../blocks/photobook/__place/photobook__place.css);
-@import url(../blocks/photobook/__button/photobook__button.css);
+@import url(../blocks/photobook/__button-delete/photobook__button-delete.css);
+@import url(../blocks/photobook/__button-like/photobook__button-like.css);
+@import url(../blocks/photobook/__button-like/_active/photobook__button-like_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
@@ -30,3 +32,6 @@
 @import url(../blocks/popup/__item/popup__item.css);
 @import url(../blocks/popup/__save/popup__save.css);
 @import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__photo/popup__photo.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__elements/popup__elements.css);

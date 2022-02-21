@@ -1,0 +1,19 @@
+.photobook__button-delete {
+  width: 18px;
+  height: 19px;
+  background-image: url('../../../images/button-delete.svg');
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  right: 20px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.photobook__button-delete:hover {
+  opacity: 0.5;
+}

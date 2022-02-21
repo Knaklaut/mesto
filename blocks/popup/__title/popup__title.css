@@ -1,0 +1,11 @@
+.popup__title {
+  max-width: 75vw;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  bottom: -10;
+}
