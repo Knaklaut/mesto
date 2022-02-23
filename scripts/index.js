@@ -1,31 +1,3 @@
-//Создать массив с набором карточек для загрузки на страницу
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // Определить ключевые переменные
 // Переменные для элементов профиля
 const profileContainer = document.querySelector('.profile');
@@ -50,6 +22,8 @@ const linkInput = popupForAddingCards.querySelector('.popup__item_el_link');
 
 // Переменные для всплывающего окна с функцией просмотра увеличенной фотографии
 const popupForIncreasedPhoto = document.querySelector('.popup_function_increase-photo');
+const popupPhoto = popupForIncreasedPhoto.querySelector('.popup__photo');
+const popupPhotoTitle = popupForIncreasedPhoto.querySelector('.popup__title');
 const closeButtonPhoto = popupForIncreasedPhoto.querySelector('.popup__close_function_increase-photo');
 
 // Переменные для управления набором фотографий
@@ -59,7 +33,7 @@ const photoTemplate = document.querySelector('#photobook__element').content;
 //Наполнить страницу карточками, определенными в массиве initialCards
 
 initialCards.forEach(item => {
-  photobook.append(createNewPhotoEl(item));
+  renderCard(item);
 });
 
 //Создать функцию для присвоения вводимых пользователем значений в строках всплывающего окна текстовым элементам веб-страницы
@@ -68,7 +42,7 @@ function assignInputs(){
   aboutInput.value = profileAbout.textContent;
 }
 
-// Создать универсальные функции для открытия и закрытия всплывающих окон
+// Создать универсальные функции для открытия и закрытия всплывающих окон, добавления нового элемента в фотоальбом
 
 function openPopup(popupEl){
   popupEl.classList.add('popup_opened');
@@ -99,14 +73,18 @@ function closePopupWithPhoto(){
   closePopup(popupForIncreasedPhoto);
 }
 
+function renderCard(item){
+  photobook.append(createNewPhotoEl(item));
+}
+
 //Создать функцию отправки пользовательских данных в шапку профиля при клике по кнопке 'Сохранить' всплывающего окна
-function formSubmitHandler(evt){
+function submitFormWithUserInfo(evt){
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileAbout.textContent = aboutInput.value;
   closePopupWithUserInfo();
 }
-formEdit.addEventListener('submit', formSubmitHandler);
+formEdit.addEventListener('submit', submitFormWithUserInfo);
 
 //Создать набор функций для добавления новой карточки в фотоальбом
 function createNewPhotoEl(item){
@@ -122,20 +100,19 @@ function createNewPhotoEl(item){
   return photoClone;
 }
 
-function photoSubmitHandler(evt){
+function handleSubmitPhoto(evt){
   evt.preventDefault();
   const newPhoto = createNewPhotoEl({
     name: placeInput.value,
     link: linkInput.value
   });
   photobook.prepend(newPhoto);
+  formAdd.reset();
   closePopupForAddingCards();
 }
 
 //Создать функцию для открытия фотографии
 function openPhoto(evt){
-  const popupPhoto = popupForIncreasedPhoto.querySelector('.popup__photo');
-  const popupPhotoTitle = popupForIncreasedPhoto.querySelector('.popup__title');
   popupPhoto.src = evt.target.src;
   popupPhoto.alt = evt.target.alt;
   popupPhotoTitle.textContent = evt.target.alt;
@@ -157,7 +134,7 @@ function setEventListeners(){
   editButton.addEventListener('click', openPopupWithUserInfo);
   closeButtonUserInfo.addEventListener('click', closePopupWithUserInfo);
   addButton.addEventListener('click', openPopupForAddingCards);
-  formAdd.addEventListener('submit', photoSubmitHandler);
+  formAdd.addEventListener('submit', handleSubmitPhoto);
   closeButtonAddingCards.addEventListener('click', closePopupForAddingCards);
   closeButtonPhoto.addEventListener('click', closePopupWithPhoto);
 }
