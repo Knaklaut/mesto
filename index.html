@@ -52,10 +52,10 @@
         <h2 class="popup__heading">Редактировать профиль</h2>
         <form class="popup__form popup__form_function_edit-info" name="user-info" novalidate>
           <fieldset class="popup__input-area">
-            <input type="text" id="name-input" class="popup__item popup__item_el_name" id="title" name="user-name" placeholder="Введите ваше имя" minlength="2" maxlength="40" required>
+            <input type="text" id="name-input" class="popup__item popup__item_el_name" name="user-name" placeholder="Введите ваше имя" minlength="2" maxlength="40" required>
             <span class="name-input-error popup__item-error"></span>
-            <input type="text" id="about-input" class="popup__item popup__item_el_about" id="subtitle" name="user-about" placeholder="Введите вашу профессию" minlength="2" maxlength="200" required>
-            <span class="about-input-error about__item-error"></span>
+            <input type="text" id="about-input" class="popup__item popup__item_el_about" name="user-about" placeholder="Введите вашу профессию" minlength="2" maxlength="200" required>
+            <span class="about-input-error popup__item-error"></span>
           </fieldset>
           <button class="popup__save" type="submit" value="submit">Сохранить</button>
         </form>
@@ -69,8 +69,10 @@
         <h2 class="popup__heading">Новое место</h2>
         <form class="popup__form popup__form_function_add-place" name="new-place-info">
           <fieldset class="popup__input-area">
-            <input type="text" class="popup__item popup__item_el_place" id="place" name="place-name" placeholder="Название" required>
-            <input type="text" class="popup__item popup__item_el_link" id="link" name="photo-link" placeholder="Ссылка на картинку" required>
+            <input type="text" id="place-input" class="popup__item popup__item_el_place" name="place-name" placeholder="Название" minlength="2" maxlength="30" required>
+            <span class="place-input-error popup__item-error"></span>
+            <input type="url" id="photo-link" class="popup__item popup__item_el_link" name="photo-link" placeholder="Ссылка на картинку" required>
+            <span class="photo-link-error popup__item-error"></span>
           </fieldset>
           <button class="popup__save" type="submit" value="submit">Создать</button>
         </form>

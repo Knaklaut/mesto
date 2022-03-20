@@ -30,13 +30,13 @@ const closeButtonPhoto = popupForIncreasedPhoto.querySelector('.popup__close_fun
 const photobook = document.querySelector('.photobook__elements');
 const photoTemplate = document.querySelector('#photobook__element').content;
 
-//Наполнить страницу карточками, определенными в массиве initialCards
+// Наполнить страницу карточками, определенными в массиве initialCards
 
 initialCards.forEach(item => {
   renderCard(item);
 });
 
-//Создать функцию для присвоения вводимых пользователем значений в строках всплывающего окна текстовым элементам веб-страницы
+// Создать функцию для присвоения вводимых пользователем значений в строках всплывающего окна текстовым элементам веб-страницы
 function assignInputs(){
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
@@ -73,11 +73,30 @@ function closePopupWithPhoto(){
   closePopup(popupForIncreasedPhoto);
 }
 
+// Создать функцию для закрытия всплывающего окна при нажатии на кнопку Esc
+function closePopupWithEscape(evt){
+  if(evt.key === 'Escape'){
+    closePopup(popupEl);
+  }
+}
+
+// Создать функцию для закрытия всплывающего окна при клике на "оверлей"
+function closePopupWithOverlayClick(){
+  const popups = Array.from(document.querySelectorAll('.popup'));
+  popups.forEach(el => {
+    el.addEventListener('mousedown', evt => {
+      if(evt.classList.contains('popup_opened')){
+        closePopup(popupEl);
+      }
+    });
+  });
+}
+
 function renderCard(item){
   photobook.append(createNewPhotoEl(item));
 }
 
-//Создать функцию отправки пользовательских данных в шапку профиля при клике по кнопке 'Сохранить' всплывающего окна
+// Создать функцию отправки пользовательских данных в шапку профиля при клике по кнопке 'Сохранить' всплывающего окна
 function submitFormWithUserInfo(evt){
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -86,7 +105,7 @@ function submitFormWithUserInfo(evt){
 }
 formEdit.addEventListener('submit', submitFormWithUserInfo);
 
-//Создать набор функций для добавления новой карточки в фотоальбом
+// Создать набор функций для добавления новой карточки в фотоальбом
 function createNewPhotoEl(item){
   const photoClone = photoTemplate.querySelector('.photobook__element').cloneNode(true);
   const photo = photoClone.querySelector('.photobook__photo');
@@ -111,7 +130,7 @@ function handleSubmitPhoto(evt){
   closePopupForAddingCards();
 }
 
-//Создать функцию для открытия фотографии
+// Создать функцию для открытия фотографии
 function openPhoto(evt){
   popupPhoto.src = evt.target.src;
   popupPhoto.alt = evt.target.alt;
@@ -119,17 +138,17 @@ function openPhoto(evt){
   openPopup(popupForIncreasedPhoto);
 }
 
-//Создать функцию для удаления фотографии
+// Создать функцию для удаления фотографии
 function deletePhoto(evt){
   evt.target.closest('.photobook__element').remove();
 }
 
-//Создать функцию для проставлени лайка на фотографии
+// Создать функцию для проставлени лайка на фотографии
 function likePhoto(evt){
   evt.target.classList.toggle('photobook__button-like_active');
 }
 
-//Создать функцию для хранения обработчиков событий
+// Создать функцию для хранения обработчиков событий
 function setEventListeners(){
   editButton.addEventListener('click', openPopupWithUserInfo);
   closeButtonUserInfo.addEventListener('click', closePopupWithUserInfo);
