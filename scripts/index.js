@@ -10,15 +10,15 @@ const profileAbout = profileContainer.querySelector('.profile__subtitle');
 const popupWithUserInfo = document.querySelector('.popup_function_user-info');
 const formEdit = popupWithUserInfo.querySelector('.popup__form_function_edit-info');
 const closeButtonUserInfo = popupWithUserInfo.querySelector('.popup__close_function_edit-info');
-const nameInput = popupWithUserInfo.querySelector('.popup__item_el_name');
-const aboutInput = popupWithUserInfo.querySelector('.popup__item_el_about');
+const nameInput = popupWithUserInfo.querySelector('.popup__input_el_name');
+const aboutInput = popupWithUserInfo.querySelector('.popup__input_el_about');
 
 // Переменные для всплывающего окна с функцией добавления фотографий
 const popupForAddingCards = document.querySelector('.popup_function_add-place');
 const formAdd = popupForAddingCards.querySelector('.popup__form_function_add-place');
 const closeButtonAddingCards = popupForAddingCards.querySelector('.popup__close_function_add-place');
-const placeInput = popupForAddingCards.querySelector('.popup__item_el_place');
-const linkInput = popupForAddingCards.querySelector('.popup__item_el_link');
+const placeInput = popupForAddingCards.querySelector('.popup__input_el_place');
+const linkInput = popupForAddingCards.querySelector('.popup__input_el_link');
 
 // Переменные для всплывающего окна с функцией просмотра увеличенной фотографии
 const popupForIncreasedPhoto = document.querySelector('.popup_function_increase-photo');
@@ -46,10 +46,12 @@ function assignInputs(){
 
 function openPopup(popupEl){
   popupEl.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupWithEscape);
 }
 
 function closePopup(popupEl){
   popupEl.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupWithEscape);
 }
 
 function openPopupWithUserInfo(){
@@ -127,6 +129,7 @@ function handleSubmitPhoto(evt){
   });
   photobook.prepend(newPhoto);
   formAdd.reset();
+  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
   closePopupForAddingCards();
 }
 
