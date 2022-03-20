@@ -19,6 +19,7 @@ const formAdd = popupForAddingCards.querySelector('.popup__form_function_add-pla
 const closeButtonAddingCards = popupForAddingCards.querySelector('.popup__close_function_add-place');
 const placeInput = popupForAddingCards.querySelector('.popup__input_el_place');
 const linkInput = popupForAddingCards.querySelector('.popup__input_el_link');
+const buttonForAddingCards = popupForAddingCards.querySelector('.popup__button');
 
 // Переменные для всплывающего окна с функцией просмотра увеличенной фотографии
 const popupForIncreasedPhoto = document.querySelector('.popup_function_increase-photo');
@@ -42,6 +43,13 @@ function assignInputs(){
   aboutInput.value = profileAbout.textContent;
 }
 
+function resetPopup(popup){
+  const errors = popup.querySelectorAll('.popup__input-error');
+  errors.forEach((error) => error.textContent = '');
+  const inputs = popup.querySelectorAll('.popup__input');
+  inputs.forEach((input) => input.classList.remove('popup__input_type_error'));
+}
+
 // Создать универсальные функции для открытия и закрытия всплывающих окон, добавления нового элемента в фотоальбом
 
 function openPopup(popupEl){
@@ -56,10 +64,12 @@ function closePopup(popupEl){
 
 function openPopupWithUserInfo(){
   assignInputs();
+  resetPopup(popupWithUserInfo);
   openPopup(popupWithUserInfo);
 }
 
 function openPopupForAddingCards(){
+  resetPopup(popupForAddingCards);
   openPopup(popupForAddingCards);
 }
 
@@ -78,24 +88,27 @@ function closePopupWithPhoto(){
 // Создать функцию для закрытия всплывающего окна при нажатии на кнопку Esc
 function closePopupWithEscape(evt){
   if(evt.key === 'Escape'){
-    closePopup(popupEl);
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
   }
 }
 
 // Создать функцию для закрытия всплывающего окна при клике на "оверлей"
-function closePopupWithOverlayClick(){
-  const popups = Array.from(document.querySelectorAll('.popup'));
-  popups.forEach(el => {
-    el.addEventListener('mousedown', evt => {
-      if(evt.classList.contains('popup_opened')){
-        closePopup(popupEl);
-      }
-    });
-  });
+function closePopupWithOverlayClick(evt){
+  if(evt.target.classList.contains('popup_opened')){
+    closePopup(evt.target);
+  }
 }
 
 function renderCard(item){
   photobook.append(createNewPhotoEl(item));
+}
+
+// Создать функцию для отключения кнопки
+const setButtonStateDisabled = (evt) => {
+  const submitButtonElement = evt.target.querySelector('.popup__button-save');
+  submitButtonElement.classList.add('popup__button-save_disabled');
+  submitButtonElement.disabled = true;
 }
 
 // Создать функцию отправки пользовательских данных в шапку профиля при клике по кнопке 'Сохранить' всплывающего окна
@@ -129,7 +142,7 @@ function handleSubmitPhoto(evt){
   });
   photobook.prepend(newPhoto);
   formAdd.reset();
-  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+  setButtonStateDisabled(evt);
   closePopupForAddingCards();
 }
 
@@ -146,7 +159,7 @@ function deletePhoto(evt){
   evt.target.closest('.photobook__element').remove();
 }
 
-// Создать функцию для проставлени лайка на фотографии
+// Создать функцию для проставления лайка на фотографии
 function likePhoto(evt){
   evt.target.classList.toggle('photobook__button-like_active');
 }
@@ -159,6 +172,9 @@ function setEventListeners(){
   formAdd.addEventListener('submit', handleSubmitPhoto);
   closeButtonAddingCards.addEventListener('click', closePopupForAddingCards);
   closeButtonPhoto.addEventListener('click', closePopupWithPhoto);
+  popupWithUserInfo.addEventListener('click', closePopupWithOverlayClick);
+  popupForAddingCards.addEventListener('click', closePopupWithOverlayClick);
+  popupForIncreasedPhoto.addEventListener('click', closePopupWithOverlayClick);
 }
 
 setEventListeners();
