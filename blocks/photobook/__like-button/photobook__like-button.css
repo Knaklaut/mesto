@@ -1,4 +1,4 @@
-.photobook__button-like {
+.photobook__like-button {
   width: 22px;
   height: 19px;
   background-image: url('../../../images/button-like.svg');
@@ -10,6 +10,6 @@
   transition: opacity 0.4s ease-in-out;
 }
 
-.photobook__button-like:hover {
+.photobook__like-button:hover {
   opacity: 0.5;
 }

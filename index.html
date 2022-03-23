@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesto</title>
-    <link rel="stylesheet" href="pages/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="pages/index.css">
 </head>
 <body>
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="images/header-logo.svg" alt="Логотип сайта">
+      <img class="header__logo" src="./images/header-logo.svg" alt="Логотип сайта">
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="images/profile-avatar.jpg" alt="Аватар профиля">
+        <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Аватар профиля">
         <div class="profile__info">
           <div class="profile__edit">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__button profile__button_type_edit" type="button"></button>
+            <button class="profile__edit-button" type="button"></button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button class="profile__button profile__button_type_add" type="button"></button>
-    </section>
+        <button class="profile__add-button" type="button"></button>
+      </section>
+
       <section class="photobook">
         <ul class="photobook__elements">
 
@@ -30,10 +31,10 @@
           <template id="photobook__element">
             <li class="photobook__element">
               <img class="photobook__photo" src="#" alt="#">
-              <button class="photobook__button-delete" type="button"></button>
+              <button class="photobook__delete-button" type="button"></button>
               <div class="photobook__description">
                 <h2 class="photobook__place"></h2>
-                <button class="photobook__button-like" type="button"></button>
+                <button class="photobook__like-button" type="button"></button>
               </div>
             </li>
           </template>
@@ -46,51 +47,51 @@
     </footer>
 
     <!--Всплывающее окно с формой для редактирования пользовательских данных-->
-    <div class="popup popup_function_user-info">
+    <section class="popup popup_function_user-info">
       <div class="popup__container">
-        <button class="popup__close popup__close_function_edit-info" type="button"></button>
-        <h2 class="popup__heading">Редактировать профиль</h2>
-        <form class="popup__form popup__form_function_edit-info" name="user-info" novalidate>
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form" name="user-info" novalidate>
           <fieldset class="popup__input-area">
-            <input type="text" id="name-input" class="popup__input popup__input_el_name" name="user-name" placeholder="Введите ваше имя" minlength="2" maxlength="40" required>
-            <span class="popup__input-error name-input-error">Введите имя пользователя.</span>
-            <input type="text" id="about-input" class="popup__input popup__input_el_about" name="user-about" placeholder="Введите вашу профессию" minlength="2" maxlength="200" required>
-            <span class="popup__input-error about-input-error">Введите описание.</span>
+            <input id="name-input" type="text" class="popup__input popup__input_el_name" placeholder="Введите ваше имя" name="user-name" minlength="2" maxlength="40" required>
+            <span id="name-input-error" class="popup__input-error"></span>
+            <input id="about-input" type="text" class="popup__input popup__input_el_about" placeholder="Введите вашу профессию" name="user-about" minlength="2" maxlength="200" required>
+            <span id="about-input-error" class="popup__input-error"></span>
+            <button class="popup__submit-btn" type="submit">Сохранить</button>
           </fieldset>
-          <button class="popup__button-save" type="submit" value="submit">Сохранить</button>
         </form>
       </div>
-    </div>
+    </section>
 
     <!--Всплывающее окно с формой для добавления фотографий-->
-    <div class="popup popup_function_add-place">
+    <section class="popup popup_function_add-place">
       <div class="popup__container">
-        <button class="popup__close popup__close_function_add-place" type="button"></button>
-        <h2 class="popup__heading">Новое место</h2>
-        <form class="popup__form popup__form_function_add-place" name="new-place-info" novalidate>
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="new-place-info" novalidate>
           <fieldset class="popup__input-area">
-            <input type="text" id="place-input" class="popup__input popup__input_el_place" name="place-name" placeholder="Название" minlength="2" maxlength="30" required>
-            <span class="popup__input-error place-input-error">Введите название места.</span>
-            <input type="url" id="link-input" class="popup__input popup__input_el_link" name="photo-link" placeholder="Ссылка на картинку" required>
-            <span class="popup__input-error link-input-error">Введите адрес url.</span>
+            <input id="place-input" type="text" class="popup__input popup__input_el_place" placeholder="Название" name="place-name" minlength="2" maxlength="30" required>
+            <span id="place-input-error" class="popup__input-error"></span>
+            <input id="link-input" type="url" class="popup__input popup__input_el_link" placeholder="Ссылка на фото" name="photo-link" required>
+            <span id="link-input-error" class="popup__input-error"></span>
+            <button class="popup__submit-btn" type="submit">Создать</button>
           </fieldset>
-          <button class="popup__button-save" type="submit" value="submit">Создать</button>
         </form>
       </div>
-    </div>
+    </section>
 
     <!--Всплывающее окно для просмотра отдельных фотографий-->
-    <div class="popup popup_function_increase-photo">
+    <section class="popup popup_function_increase-photo">
       <div class="popup__elements">
-        <button class="popup__close popup__close_function_increase-photo" type="button"></button>
+        <button class="popup__close" type="button"></button>
         <img class="popup__photo" src="#" alt="#">
-        <h2 class="popup__title"></h2>
+        <h2 class="popup__photo-title"></h2>
       </div>
-    </div>
+    </section>
 
   </div>
   <script src="./scripts/cards.js"></script>
-  <script src="./scripts/validation.js"></script>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

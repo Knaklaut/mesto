@@ -1,4 +1,14 @@
-//Создать массив с набором карточек для загрузки на страницу
+//объект параметров для валидации форм
+const validationObj = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+};
+
+//массив отображаемых карточек при загрузке страницы
 const initialCards = [
   {
     name: 'Архыз',
