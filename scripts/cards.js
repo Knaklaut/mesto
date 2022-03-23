@@ -1,4 +1,4 @@
-//объект параметров для валидации форм
+// Создать объект с набором параметров для валидации форм
 const validationObj = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -8,7 +8,7 @@ const validationObj = {
   errorClass: 'popup__input-error_active',
 };
 
-//массив отображаемых карточек при загрузке страницы
+// Создать массив с набором карточек для загрузки на страницу
 const initialCards = [
   {
     name: 'Архыз',
