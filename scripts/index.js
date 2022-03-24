@@ -1,22 +1,22 @@
 // Определить ключевые переменные
 // Переменные для элементов профиля
 const profileContainer = document.querySelector('.profile');
-const editButton = profileContainer.querySelector('.profile__edit-button');
-const addButton = profileContainer.querySelector('.profile__add-button');
+const buttonEdit = profileContainer.querySelector('.profile__edit-button');
+const buttonAdd = profileContainer.querySelector('.profile__add-button');
 const profileName = profileContainer.querySelector('.profile__title');
 const profileAbout = profileContainer.querySelector('.profile__subtitle');
 
 // Переменные для всплывающего окна редактирования данных пользователя
 const popupWithUserInfo = document.querySelector('.popup_function_user-info');
 const popupWithUserInfoForm = popupWithUserInfo.querySelector('.popup__form');
-const nameInput = popupWithUserInfo.querySelector('.popup__input_el_name');
-const aboutInput = popupWithUserInfo.querySelector('.popup__input_el_about');
+const inputName = popupWithUserInfo.querySelector('.popup__input_el_name');
+const inputAbout = popupWithUserInfo.querySelector('.popup__input_el_about');
 
 // Переменные для всплывающего окна с функцией добавления фотографий
 const popupForAddingCards = document.querySelector('.popup_function_add-place');
 const popupForAddingCardsForm = popupForAddingCards.querySelector('.popup__form');
-const placeInput = popupForAddingCards.querySelector('.popup__input_el_place');
-const linkInput = popupForAddingCards.querySelector('.popup__input_el_link');
+const inputPlace = popupForAddingCards.querySelector('.popup__input_el_place');
+const inputLink = popupForAddingCards.querySelector('.popup__input_el_link');
 
 // Переменные для всплывающего окна с функцией просмотра увеличенной фотографии
 const popupForIncreasedPhoto = document.querySelector('.popup_function_increase-photo');
@@ -42,7 +42,6 @@ enableValidation(validationObj);
 // Создать универсальные функции для открытия и закрытия всплывающих окон
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  resetValidation (popup, validationObj);
   document.addEventListener('keydown', closePopupWithEscape);
 }
 
@@ -61,16 +60,9 @@ Array.from(document.querySelectorAll('.popup__close')).forEach(closeButton => {
 });
 
 // Создать слушатель события, открывающего всплывающее окно для добавления нового фото
-addButton.addEventListener('click', () => openPopup(popupForAddingCards));
-
-// Создать слушатель события для открытия всплывающего окна с увеличенным фото
-photobook.addEventListener('click', evt => {
-  if (evt.target.classList.contains('photobook__photo')){
-    openPopup(popupForIncreasedPhoto);
-    popupPhotoTitle.textContent = evt.target.closest('.photobook__element').querySelector('.photobook__place').textContent;
-    popupPhoto.src = evt.target.src;
-    popupPhoto.alt = evt.target.alt;
-  }
+buttonAdd.addEventListener('click', () => {
+  openPopup(popupForAddingCards);
+  resetValidation(popupForAddingCards, validationObj);
 });
 
 // Создать функцию для закрытия всплывающего окна при нажатии на кнопку Esc
@@ -95,19 +87,30 @@ Array.from(document.querySelectorAll('.popup')).forEach(popup => {
 // Создать функцию отправки пользовательских данных в шапку профиля при клике по кнопке 'Сохранить' всплывающего окна
 function submitFormWithUserInfo(evt) {
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileAbout.textContent = aboutInput.value;
+  profileName.textContent = inputName.value;
+  profileAbout.textContent = inputAbout.value;
   closePopup(popupWithUserInfo);
 }
 
 popupWithUserInfoForm.addEventListener('submit', submitFormWithUserInfo);
 
 // Создать слушатель события, открывающего всплывающее окно для редактирования пользовательских данных
-editButton.addEventListener('click', function() {
-  nameInput.value = profileName.textContent;
-  aboutInput.value = profileAbout.textContent;
+buttonEdit.addEventListener('click', function() {
+  inputName.value = profileName.textContent;
+  inputAbout.value = profileAbout.textContent;
   openPopup(popupWithUserInfo);
+  resetValidation(popupWithUserInfo, validationObj);
 });
+
+// Создать функцию для просмотра увеличенного фото в фотоальбоме
+function increasePhoto (evt){
+  if (evt.target.classList.contains('photobook__photo')){
+    openPopup(popupForIncreasedPhoto);
+    popupPhotoTitle.textContent = evt.target.closest('.photobook__element').querySelector('.photobook__place').textContent;
+    popupPhoto.src = evt.target.src;
+    popupPhoto.alt = evt.target.alt;
+  }
+}
 
 // Создать функцию для генерации карточки с фото
 function createNewPhotoEl(item) {
@@ -117,8 +120,11 @@ function createNewPhotoEl(item) {
   photoTitle.textContent = item.name;
   photoEl.src = item.link;
   photoEl.alt = item.name;
+
+  photoEl.addEventListener('click', increasePhoto);
   photoClone.querySelector('.photobook__delete-button').addEventListener('click', deletePhoto);
   photoClone.querySelector('.photobook__like-button').addEventListener('click', likePhoto);
+
   return photoClone;
 }
 
@@ -126,8 +132,8 @@ function createNewPhotoEl(item) {
 function handleSubmitPhoto(evt) {
   evt.preventDefault();
   const newPhoto = {
-    name: placeInput.value,
-    link: linkInput.value,
+    name: inputPlace.value,
+    link: inputLink.value,
   };
   photobook.prepend(createNewPhotoEl(newPhoto));
   closePopup(popupForAddingCards);
