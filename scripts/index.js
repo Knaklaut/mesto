@@ -48,10 +48,6 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupWithEscape);
-  const popupForm = popup.querySelector('.popup__form');
-  if (popupForm){
-    popupForm.reset();
-  }
 }
 
 // Создать слушатель события для закрытия всплывающего окна при клике на "крестик"
@@ -104,12 +100,10 @@ buttonEdit.addEventListener('click', function() {
 
 // Создать функцию для просмотра увеличенного фото в фотоальбоме
 function increasePhoto (evt){
-  if (evt.target.classList.contains('photobook__photo')){
-    openPopup(popupForIncreasedPhoto);
-    popupPhotoTitle.textContent = evt.target.closest('.photobook__element').querySelector('.photobook__place').textContent;
-    popupPhoto.src = evt.target.src;
-    popupPhoto.alt = evt.target.alt;
-  }
+  popupPhotoTitle.textContent = evt.target.closest('.photobook__element').querySelector('.photobook__place').textContent;
+  popupPhoto.src = evt.target.src;
+  popupPhoto.alt = evt.target.alt;
+  openPopup(popupForIncreasedPhoto);
 }
 
 // Создать функцию для генерации карточки с фото
@@ -136,6 +130,7 @@ function handleSubmitPhoto(evt) {
     link: inputLink.value,
   };
   photobook.prepend(createNewPhotoEl(newPhoto));
+  popupForAddingCardsForm.reset();
   closePopup(popupForAddingCards);
 }
 
