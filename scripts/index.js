@@ -1,4 +1,47 @@
-// Определить ключевые переменные
+// Импортирование объектов Card и FormValidator
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
+// Определение начального набора данных для работы с элементами страницы
+// Объект с набором параметров для валидации форм
+export const validationObj = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+};
+
+// Массив с начальным набором карточек для загрузки на страницу
+export const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+// Определение ключевых переменных
 // Переменные для элементов профиля
 const profileContainer = document.querySelector('.profile');
 const buttonEdit = profileContainer.querySelector('.profile__edit-button');
@@ -23,23 +66,28 @@ const popupForIncreasedPhoto = document.querySelector('.popup_function_increase-
 const popupPhoto = popupForIncreasedPhoto.querySelector('.popup__photo');
 const popupPhotoTitle = popupForIncreasedPhoto.querySelector('.popup__photo-title');
 
-// Переменные для управления набором фотографий
+// Переменная для управления набором фотографий
 const photobook = document.querySelector('.photobook__elements');
-const photoTemplate = document.querySelector('#photobook__element').content;
 
-// Наполнить страницу карточками, определенными в массиве initialCards
+// Заполнение страницы карточками, определенными в массиве initialCards
 initialCards.forEach(item => {
   renderCard(item);
 });
 
-function renderCard(item){
-  photobook.append(createNewPhotoEl(item));
+function renderCard(item) {
+  const card = new Card(item, '#photobook__element', increasePhoto);
+  const newCard = card.generateCard();
+  photobook.append(newCard);
 }
 
-// Запустить функцию для валидации пользовательских форм
-enableValidation(validationObj);
+// Создание экземпляров класса FormValidator c запуском валидации форм
+const userInfoValidator = new FormValidator(validationObj, popupWithUserInfo);
+userInfoValidator.enableValidation();
 
-// Создать универсальные функции для открытия и закрытия всплывающих окон
+const newCardsValidator = new FormValidator(validationObj, popupForAddingCards);
+newCardsValidator.enableValidation();
+
+// Создание универсальных функций для открытия и закрытия всплывающих окон
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupWithEscape);
@@ -50,98 +98,76 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupWithEscape);
 }
 
-// Создать слушатель события для закрытия всплывающего окна при клике на "крестик"
-Array.from(document.querySelectorAll('.popup__close')).forEach(closeButton => {
-  closeButton.addEventListener('click', () => closePopup(closeButton.closest('.popup')));
-});
-
-// Создать слушатель события, открывающего всплывающее окно для добавления нового фото
-buttonAdd.addEventListener('click', () => {
-  openPopup(popupForAddingCards);
-  resetValidation(popupForAddingCards, validationObj);
-});
-
-// Создать функцию для закрытия всплывающего окна при нажатии на кнопку Esc
-function closePopupWithEscape(evt) {
-  if (evt.key === 'Escape'){
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
-
-// Создать функцию для закрытия всплывающего окна при клике на "оверлей"
+// Функция для закрытия всплывающего окна при клике на "оверлей"
 function closePopupWithOverlayClick(evt) {
   if (evt.target.classList.contains('popup')) {
     closePopup(evt.target);
   }
 }
 
-// Создать слушатель события для закрытия всплывающего окна при клике на "оверлей"
-Array.from(document.querySelectorAll('.popup')).forEach(popup => {
-  popup.addEventListener('click', closePopupWithOverlayClick);
-});
+// Функция для закрытия всплывающего окна при нажатии на кнопку Esc
+function closePopupWithEscape(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
+}
 
-// Создать функцию отправки пользовательских данных в шапку профиля при клике по кнопке 'Сохранить' всплывающего окна
+// Функция отправки пользовательских данных в шапку профиля при клике по кнопке 'Сохранить' всплывающего окна
 function submitFormWithUserInfo(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
+  popupWithUserInfoForm.reset();
   closePopup(popupWithUserInfo);
 }
 
-popupWithUserInfoForm.addEventListener('submit', submitFormWithUserInfo);
-
-// Создать слушатель события, открывающего всплывающее окно для редактирования пользовательских данных
-buttonEdit.addEventListener('click', function() {
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
-  openPopup(popupWithUserInfo);
-  resetValidation(popupWithUserInfo, validationObj);
-});
-
-// Создать функцию для просмотра увеличенного фото в фотоальбоме
-function increasePhoto (evt){
-  popupPhotoTitle.textContent = evt.target.closest('.photobook__element').querySelector('.photobook__place').textContent;
-  popupPhoto.src = evt.target.src;
-  popupPhoto.alt = evt.target.alt;
-  openPopup(popupForIncreasedPhoto);
-}
-
-// Создать функцию для генерации карточки с фото
-function createNewPhotoEl(item) {
-  const photoClone = photoTemplate.cloneNode(true);
-  const photoEl = photoClone.querySelector('.photobook__photo');
-  const photoTitle = photoClone.querySelector('.photobook__place');
-  photoTitle.textContent = item.name;
-  photoEl.src = item.link;
-  photoEl.alt = item.name;
-
-  photoEl.addEventListener('click', increasePhoto);
-  photoClone.querySelector('.photobook__delete-button').addEventListener('click', deletePhoto);
-  photoClone.querySelector('.photobook__like-button').addEventListener('click', likePhoto);
-
-  return photoClone;
-}
-
-// Создать функцию для добавления нового фото в фотоальбом
+// Функция для добавления нового фото в фотоальбом
 function handleSubmitPhoto(evt) {
   evt.preventDefault();
   const newPhoto = {
     name: inputPlace.value,
     link: inputLink.value,
   };
-  photobook.prepend(createNewPhotoEl(newPhoto));
+  photobook.prepend(new Card(newPhoto, '#photobook__element', increasePhoto).generateCard());
   popupForAddingCardsForm.reset();
   closePopup(popupForAddingCards);
 }
 
+// Функция для просмотра увеличенного фото в фотоальбоме
+function increasePhoto(name, link) {
+  openPopup(popupForIncreasedPhoto);
+  popupPhotoTitle.textContent = name;
+  popupPhoto.src = link;
+  popupPhoto.alt = name;
+}
+
+// Слушатели событий
+// Слушатель события, открывающего всплывающее окно для редактирования пользовательских данных
+buttonEdit.addEventListener('click', function() {
+  inputName.value = profileName.textContent;
+  inputAbout.value = profileAbout.textContent;
+  openPopup(popupWithUserInfo);
+  userInfoValidator.resetValidation();
+});
+
+// Слушатель события отправки формы с пользовательскими данными
+popupWithUserInfoForm.addEventListener('submit', submitFormWithUserInfo);
+
+// Слушатель события, открывающего всплывающее окно для добавления нового фото
+buttonAdd.addEventListener('click', function() {
+  openPopup(popupForAddingCards);
+  newCardsValidator.resetValidation();
+});
+
+//Слушатель события отправки формы с данными для нового фото
 popupForAddingCardsForm.addEventListener('submit', handleSubmitPhoto);
 
-// Создать функцию для удаления фотографии
-function deletePhoto(evt){
-  evt.target.closest('.photobook__element').remove();
-}
+// Слушатель события для закрытия всплывающего окна при клике на "крестик"
+Array.from(document.querySelectorAll('.popup__close')).forEach(closeButton => {
+  closeButton.addEventListener('click', () => closePopup(closeButton.closest('.popup')));
+});
 
-// Создать функцию для проставления лайка на фотографии
-function likePhoto(evt){
-  evt.target.classList.toggle('photobook__like-button_active');
-}
+// Слушатель события для закрытия всплывающего окна при клике на "оверлей"
+Array.from(document.querySelectorAll('.popup')).forEach(popup => {
+  popup.addEventListener('click', closePopupWithOverlayClick);
+});
