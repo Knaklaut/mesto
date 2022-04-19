@@ -1,45 +1,7 @@
 // Импортирование объектов Card и FormValidator
+import { validationObj, initialCards } from './data.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-
-// Определение начального набора данных для работы с элементами страницы
-// Объект с набором параметров для валидации форм
-export const validationObj = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-btn',
-  inactiveButtonClass: 'popup__submit-btn_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active',
-};
-
-// Массив с начальным набором карточек для загрузки на страницу
-export const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 // Определение ключевых переменных
 // Переменные для элементов профиля
@@ -77,7 +39,12 @@ initialCards.forEach(item => {
 function renderCard(item) {
   const card = new Card(item, '#photobook__element', increasePhoto);
   const newCard = card.generateCard();
-  photobook.append(newCard);
+  addCard(newCard);
+}
+
+// Функция для добавления карточки с фотографией на страницу
+function addCard(item) {
+  photobook.prepend(item);
 }
 
 // Создание экземпляров класса FormValidator c запуском валидации форм
@@ -128,7 +95,7 @@ function handleSubmitPhoto(evt) {
     name: inputPlace.value,
     link: inputLink.value,
   };
-  photobook.prepend(new Card(newPhoto, '#photobook__element', increasePhoto).generateCard());
+  renderCard(newPhoto);
   popupForAddingCardsForm.reset();
   closePopup(popupForAddingCards);
 }
@@ -141,23 +108,29 @@ function increasePhoto(name, link) {
   popupPhoto.alt = name;
 }
 
-// Слушатели событий
-// Слушатель события, открывающего всплывающее окно для редактирования пользовательских данных
-buttonEdit.addEventListener('click', function() {
+// Функция для работы с формой редактирования пользовательских данных
+function handleUserDataForm() {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
   openPopup(popupWithUserInfo);
   userInfoValidator.resetValidation();
-});
+}
+
+// Функция для работы с формой добавления нового фото
+function handleNewPhotoForm() {
+  openPopup(popupForAddingCards);
+  newCardsValidator.resetValidation();
+}
+
+// Слушатели событий
+// Слушатель события, открывающего всплывающее окно для редактирования пользовательских данных
+buttonEdit.addEventListener('click', handleUserDataForm);
 
 // Слушатель события отправки формы с пользовательскими данными
 popupWithUserInfoForm.addEventListener('submit', submitFormWithUserInfo);
 
 // Слушатель события, открывающего всплывающее окно для добавления нового фото
-buttonAdd.addEventListener('click', function() {
-  openPopup(popupForAddingCards);
-  newCardsValidator.resetValidation();
-});
+buttonAdd.addEventListener('click', handleNewPhotoForm);
 
 //Слушатель события отправки формы с данными для нового фото
 popupForAddingCardsForm.addEventListener('submit', handleSubmitPhoto);

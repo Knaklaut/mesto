@@ -24,6 +24,7 @@ export class Card {
 
   _handleDeleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   generateCard() {

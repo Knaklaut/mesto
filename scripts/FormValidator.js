@@ -9,6 +9,9 @@ export class FormValidator {
     this._inputErrorClass = data.inputErrorClass;
     this._errorClass = data.errorClass;
     this._formElement = form;
+    this._inputs = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    this._button = this._formElement.querySelector(this._submitButtonSelector);
+    this._form = this._formElement.querySelector(this._formSelector);
   }
 
   // Метод showInputError выводит сообщение об ошибке для всех элементов input во всех формах
@@ -56,8 +59,8 @@ export class FormValidator {
 
   // Метод setEventListeners добавляет обработчики событий всем элементам input во всех формах
   _setEventListeners() {
-    const inputs = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    const button = this._formElement.querySelector(this._submitButtonSelector);
+    const inputs = this._inputs;
+    const button = this._button;
     this._toggleButtonState(inputs, button);
     inputs.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
@@ -74,9 +77,8 @@ export class FormValidator {
 
   // Метод resetValidation сбрасывает результаты валидации
   resetValidation() {
-    const form = this._formElement.querySelector(this._formSelector);
-    const inputs = Array.from(form.querySelectorAll(this._inputSelector));
-    const button = form.querySelector(this._submitButtonSelector);
+    const inputs = this._inputs;
+    const button = this._button;
     this._toggleButtonState(inputs, button);
     inputs.forEach((inputElement) => {
       this._hideInputError(inputElement);
