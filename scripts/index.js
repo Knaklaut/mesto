@@ -33,13 +33,12 @@ const photobook = document.querySelector('.photobook__elements');
 
 // Заполнение страницы карточками, определенными в массиве initialCards
 initialCards.forEach(item => {
-  renderCard(item);
+  addCard(renderCard(item));
 });
 
 function renderCard(item) {
   const card = new Card(item, '#photobook__element', increasePhoto);
-  const newCard = card.generateCard();
-  addCard(newCard);
+  return card.generateCard();
 }
 
 // Функция для добавления карточки с фотографией на страницу
@@ -95,7 +94,7 @@ function handleSubmitPhoto(evt) {
     name: inputPlace.value,
     link: inputLink.value,
   };
-  renderCard(newPhoto);
+  addCard(renderCard(newPhoto));
   popupForAddingCardsForm.reset();
   closePopup(popupForAddingCards);
 }
