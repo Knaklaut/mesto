@@ -1,20 +1,18 @@
 // Класс Card создает стандартную карточку со ссылкой на изображение и подписью
-
-export class Card {
-  constructor(data, cardSelector, increasePhoto) {
+export default class Card {
+  constructor({ data, handleCardClick }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
-    this._increasePhoto = increasePhoto;
   }
 
   _getTemplate() {
-    const cardElement = document
+    return document
     .querySelector(this._cardSelector)
     .content
     .querySelector('.photobook__element')
     .cloneNode(true);
-    return cardElement;
   }
 
   _handleLikeCard() {
@@ -29,16 +27,17 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._setEventListeners();
-    this._element.querySelector('.photobook__photo').src = this._link;
-    this._element.querySelector('.photobook__photo').alt = this._name;
     this._element.querySelector('.photobook__place').textContent = this._name;
+    this._photo = this._element.querySelector('.photobook__photo');
+    this._photo.src = this._link;
+    this._photo.alt = this._name;
+    this._setEventListeners();
     return this._element;
   }
 
   _setEventListeners() {
-    this._element.querySelector('.photobook__photo').addEventListener('click', () => {
-      this._increasePhoto(this._name, this._link);
+    this._photo.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link);
     });
 
     this._element.querySelector('.photobook__like-button').addEventListener('click', () => {
