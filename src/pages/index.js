@@ -8,9 +8,7 @@ import {
   buttonEdit,
   buttonAddPhoto,
   inputName,
-  inputAbout,
-  inputLink,
-  inputTitle
+  inputAbout
 } from "../utils/constants.js";
 
 // Импортирование классов
@@ -60,17 +58,21 @@ const formValidationPopupProfile = new FormValidator(validationObj, identificati
 formValidationPopupProfile.enableValidation();
 
 // Создание ключевых функций
-// Функция отправки пользовательских данных в шапку профиля при клике по кнопке 'Сохранить' всплывающего окна
-function handleUserInfo() {
-  userInfo.setUserInfo(inputName, inputAbout);
-  popupUserInfo.close();
-}
 
 // Функция для заполнения полей формы с пользовательскими данными информацией из профиля
 function handleInputData() {
   const userInfoReceived = userInfo.getUserInfo();
   inputName.value = userInfoReceived.userName;
   inputAbout.value = userInfoReceived.userAbout;
+}
+
+// Функция отправки пользовательских данных в шапку профиля при клике по кнопке 'Сохранить' всплывающего окна
+function handleUserInfo(data) {
+  userInfo.setUserInfo({
+    userName: data['userName'],
+    userAbout: data['userAbout']
+  });
+  popupUserInfo.close();
 }
 
 // Функция для просмотра увеличенного фото в фотоальбоме
@@ -81,18 +83,12 @@ function handleCardClick(title, link) {
 // Функция для создания карточки с фотографией
 function createCard(item) {
   const card = new Card({ data: item, handleCardClick }, identificationObj.elementRef);
-  const newCard = card.generateCard();
-  return newCard;
+  return card.generateCard();
 }
 
 // Функция для добавления нового фото в фотоальбом
 function handlePopupAddCard(newData) {
-  newData = {
-    title: inputTitle.value,
-    link: inputLink.value
-  }
   const newCard = createCard(newData);
-  newCard.querySelector('.photobook__place').textContent = newData.title;
   cardList.addItem(newCard);
   popupForAddingCards.close();
 }
@@ -100,8 +96,8 @@ function handlePopupAddCard(newData) {
 // Слушатели событий
 // Слушатель события, открывающего всплывающее окно для редактирования пользовательских данных
 buttonEdit.addEventListener('click', () => {
-  popupUserInfo.open();
   handleInputData();
+  popupUserInfo.open();
   formValidationPopupProfile.resetValidation();
 });
 

@@ -11,13 +11,16 @@ export default class Card {
     return document
     .querySelector(this._cardSelector)
     .content
-    .querySelector('.photobook__element')
+    .querySelector('.card')
     .cloneNode(true);
   }
 
+  _buttonLikeCard() {
+    return this._element.querySelector('.card__like-button');
+  }
+
   _handleLikeCard() {
-    const cardLiked = this._element.querySelector('.photobook__like-button');
-    cardLiked.classList.toggle('photobook__like-button_active');
+    this._buttonLikeCard().classList.toggle('card__like-button_active');
   }
 
   _handleDeleteCard() {
@@ -27,8 +30,8 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._element.querySelector('.photobook__place').textContent = this._name;
-    this._photo = this._element.querySelector('.photobook__photo');
+    this._element.querySelector('.card__place').textContent = this._name;
+    this._photo = this._element.querySelector('.card__photo');
     this._photo.src = this._link;
     this._photo.alt = this._name;
     this._setEventListeners();
@@ -40,11 +43,11 @@ export default class Card {
       this._handleCardClick(this._name, this._link);
     });
 
-    this._element.querySelector('.photobook__like-button').addEventListener('click', () => {
+    this._buttonLikeCard().addEventListener('click', () => {
       this._handleLikeCard();
     });
 
-    this._element.querySelector('.photobook__delete-button').addEventListener('click', () => {
+    this._element.querySelector('.card__delete-button').addEventListener('click', () => {
       this._handleDeleteCard();
     });
   }

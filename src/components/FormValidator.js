@@ -57,13 +57,13 @@ export default class FormValidator {
 
   // Метод _setEventListeners добавляет обработчики событий всем элементам input во всех формах
   _setEventListeners() {
-    const inputs = Array.from(this._formEl.querySelectorAll(this._inputSelector));
-    const button = this._formEl.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(inputs, button);
-    inputs.forEach((input) => {
+    this._inputs = Array.from(this._formEl.querySelectorAll(this._inputSelector));
+    this._button = this._formEl.querySelector(this._submitButtonSelector);
+    this._toggleButtonState(this._inputs, this._button);
+    this._inputs.forEach((input) => {
       input.addEventListener('input', () => {
         this._isValid(input);
-        this._toggleButtonState(inputs, button);
+        this._toggleButtonState(this._inputs, this._button);
       });
     });
   }
@@ -76,10 +76,10 @@ export default class FormValidator {
   // Метод resetValidation сбрасывает результаты валидации
   resetValidation() {
     const form = this._formEl.querySelector(this._formSelector);
-    const inputsArray = Array.from(form.querySelectorAll(this._inputSelector));
+    const inputs = Array.from(form.querySelectorAll(this._inputSelector));
     const button = form.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(inputsArray, button);
-    inputsArray.forEach((input) => {
+    this._toggleButtonState(inputs, button);
+    inputs.forEach((input) => {
       this._hideInputError(input);
     });
   }

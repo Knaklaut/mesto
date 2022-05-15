@@ -10,9 +10,9 @@ export default class PopupWithImage extends Popup {
 
   // Метод open расширяет родительский метод и добавляет ему функциональность, которая позволяет обрабатывать src исходного изображения и вставлять подпись
   open(title, link) {
-    super.open();
     this._photoEl.src = link;
     this._photoEl.alt = title;
     this._photoTitle.textContent = title;
+    super.open();
   }
 }

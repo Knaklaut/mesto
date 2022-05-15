@@ -9,11 +9,11 @@
 <body>
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Логотип сайта">
+      <img class="header__logo" src='./images/header-logo.svg' alt="Логотип сайта">
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Аватар профиля">
+        <img class="profile__avatar" src='./images/profile-avatar.jpg' alt="Аватар профиля">
         <div class="profile__info">
           <div class="profile__edit">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -26,19 +26,7 @@
 
       <section class="photobook">
         <ul class="photobook__elements">
-
-          <!--Шаблон для заполнения фотоальбома через функции JavaScript-->
-          <template id="photobook__element">
-            <li class="photobook__element">
-              <img class="photobook__photo" src="#" alt="#">
-              <button class="photobook__delete-button" type="button"></button>
-              <div class="photobook__description">
-                <h2 class="photobook__place"></h2>
-                <button class="photobook__like-button" type="button"></button>
-              </div>
-            </li>
-          </template>
-
+          <!--Данные из <template> будут вставлены сюда-->
         </ul>
       </section>
     </main>
@@ -53,9 +41,9 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="user-info" novalidate>
           <fieldset class="popup__input-area">
-            <input id="name-input" type="text" class="popup__input popup__input_el_name" placeholder="Введите ваше имя" name="user-name" minlength="2" maxlength="40" required>
+            <input id="name-input" type="text" class="popup__input popup__input_el_name" placeholder="Введите ваше имя" name="userName" minlength="2" maxlength="40" required>
             <span id="name-input-error" class="popup__input-error"></span>
-            <input id="about-input" type="text" class="popup__input popup__input_el_about" placeholder="Введите вашу профессию" name="user-about" minlength="2" maxlength="200" required>
+            <input id="about-input" type="text" class="popup__input popup__input_el_about" placeholder="Введите вашу профессию" name="userAbout" minlength="2" maxlength="200" required>
             <span id="about-input-error" class="popup__input-error"></span>
             <button class="popup__submit-btn" type="submit">Сохранить</button>
           </fieldset>
@@ -70,9 +58,9 @@
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="new-place-info" novalidate>
           <fieldset class="popup__input-area">
-            <input id="place-input" type="text" class="popup__input popup__input_el_place" placeholder="Название" name="place-name" minlength="2" maxlength="30" required>
+            <input id="place-input" type="text" class="popup__input popup__input_el_place" placeholder="Название" name="name" minlength="2" maxlength="30" required>
             <span id="place-input-error" class="popup__input-error"></span>
-            <input id="link-input" type="url" class="popup__input popup__input_el_link" placeholder="Ссылка на фото" name="photo-link" required>
+            <input id="link-input" type="url" class="popup__input popup__input_el_link" placeholder="Ссылка на фото" name="link" required>
             <span id="link-input-error" class="popup__input-error"></span>
             <button class="popup__submit-btn" type="submit">Создать</button>
           </fieldset>
@@ -90,5 +78,18 @@
     </section>
 
   </div>
+
+  <!--Шаблон для заполнения фотоальбома через функции JavaScript-->
+  <template id="card">
+    <li class="card">
+      <img class="card__photo" src="#" alt="#">
+      <button class="card__delete-button" type="button"></button>
+      <div class="card__description">
+        <h2 class="card__place"></h2>
+        <button class="card__like-button" type="button"></button>
+      </div>
+    </li>
+  </template>
+
 </body>
 </html>

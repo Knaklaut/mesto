@@ -11,12 +11,12 @@ export default class UserInfo {
     return {
       userName: this._name.textContent,
       userAbout: this._about.textContent
-    };
+    }
   }
 
-  // Метод setUserInfo принимает новые пользовательские данные и добавляет их на страницу
-  setUserInfo(updateName, updateAbout) {
-    this._name.textContent = updateName.value;
-    this._about.textContent = updateAbout.value;
+  // Метод setUserInfo принимает обновленные пользовательские данные
+  setUserInfo(userName, userAbout) {
+    this._name.textContent = userName;
+    this._about.textContent = userAbout
   }
 }

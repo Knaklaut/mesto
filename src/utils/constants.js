@@ -17,7 +17,7 @@ const identificationObj = {
   profileAbout: '.profile__subtitle',
   popupPhoto: '.popup_function_increase-photo',
   elementsContainer: '.photobook__elements',
-  elementRef: '#photobook__element',
+  elementRef: '#card',
 };
 
 // Массив с начальным набором карточек для загрузки на страницу
@@ -56,8 +56,6 @@ const buttonEdit = container.querySelector(".profile__edit-button");
 const buttonAddPhoto = container.querySelector(".profile__add-button");
 const inputName = popupProfile.querySelector('.popup__input_el_name');
 const inputAbout = popupProfile.querySelector('.popup__input_el_about');
-const inputLink = popupCards.querySelector('.popup__input_el_link');
-const inputTitle = popupCards.querySelector('.popup__input_el_place');
 
 export {
   validationObj,
@@ -66,7 +64,5 @@ export {
   buttonEdit,
   buttonAddPhoto,
   inputName,
-  inputAbout,
-  inputLink,
-  inputTitle
+  inputAbout
 };
