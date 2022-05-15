@@ -3,7 +3,6 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popupEl = document.querySelector(popupSelector);
-    this._closeBtn = this._popupEl.querySelector('.popup__close');
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
@@ -26,16 +25,15 @@ export default class Popup {
     }
   }
 
-  // Метод _handleOverlayClose описывает логику закрытия всплывающего окна при клике за пределами всплывающего окна
-  _handleOverlayClose(evt) {
-    if (evt.target.classList.contains('popup')) {
+  // Метод _handlePopupClose описывает логику закрытия всплывающего окна при клике по кнопке с крестиком или за пределами всплывающего окна
+  _handlePopupClose(evt) {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
       this.close();
     }
   }
 
-  // Метод setEventListeners добавляет слушатели событий иконке закрытия всплывающего окна и самому попапу
+  // Метод setEventListeners добавляет слушатель событий для закрытия всплывающего окнца
   setEventListeners() {
-    this._closeBtn.addEventListener('click', () => this.close());
-    this._popupEl.addEventListener('click', (evt) => this._handleOverlayClose(evt));
+    this._popupEl.addEventListener('click', (evt) => this._handlePopupClose(evt));
   }
 }

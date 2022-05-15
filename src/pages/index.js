@@ -68,10 +68,7 @@ function handleInputData() {
 
 // Функция отправки пользовательских данных в шапку профиля при клике по кнопке 'Сохранить' всплывающего окна
 function handleUserInfo(data) {
-  userInfo.setUserInfo({
-    userName: data['userName'],
-    userAbout: data['userAbout']
-  });
+  userInfo.setUserInfo(data.userName, data.userAbout);
   popupUserInfo.close();
 }
 

@@ -45,13 +45,13 @@ export default class FormValidator {
 
 
   // Метод _toggleButtonState изменяет состояние кнопки в зависимости от наличия либо отсутствия невалидного элемента input в форме
-  _toggleButtonState(inputs, button) {
-    if(this._hasInvalidInput(inputs)) {
-      button.setAttribute('disabled', true);
-      button.classList.add(this._inactiveButtonClass);
+  _toggleButtonState() {
+    if(this._hasInvalidInput(this._inputs)) {
+      this._button.setAttribute('disabled', true);
+      this._button.classList.add(this._inactiveButtonClass);
     } else {
-      button.removeAttribute('disabled');
-      button.classList.remove(this._inactiveButtonClass);
+      this._button.removeAttribute('disabled');
+      this._button.classList.remove(this._inactiveButtonClass);
     }
   }
 
@@ -59,11 +59,11 @@ export default class FormValidator {
   _setEventListeners() {
     this._inputs = Array.from(this._formEl.querySelectorAll(this._inputSelector));
     this._button = this._formEl.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(this._inputs, this._button);
+    this._toggleButtonState();
     this._inputs.forEach((input) => {
       input.addEventListener('input', () => {
         this._isValid(input);
-        this._toggleButtonState(this._inputs, this._button);
+        this._toggleButtonState();
       });
     });
   }
@@ -76,10 +76,10 @@ export default class FormValidator {
   // Метод resetValidation сбрасывает результаты валидации
   resetValidation() {
     const form = this._formEl.querySelector(this._formSelector);
-    const inputs = Array.from(form.querySelectorAll(this._inputSelector));
-    const button = form.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(inputs, button);
-    inputs.forEach((input) => {
+    this._inputs = Array.from(form.querySelectorAll(this._inputSelector));
+    this._button = form.querySelector(this._submitButtonSelector);
+    this._toggleButtonState();
+    this._inputs.forEach((input) => {
       this._hideInputError(input);
     });
   }

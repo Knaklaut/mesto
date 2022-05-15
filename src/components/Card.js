@@ -15,12 +15,8 @@ export default class Card {
     .cloneNode(true);
   }
 
-  _buttonLikeCard() {
-    return this._element.querySelector('.card__like-button');
-  }
-
   _handleLikeCard() {
-    this._buttonLikeCard().classList.toggle('card__like-button_active');
+    this._buttonLikeCard.classList.toggle('card__like-button_active');
   }
 
   _handleDeleteCard() {
@@ -31,6 +27,7 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._element.querySelector('.card__place').textContent = this._name;
+    this._buttonLikeCard = this._element.querySelector('.card__like-button')
     this._photo = this._element.querySelector('.card__photo');
     this._photo.src = this._link;
     this._photo.alt = this._name;
@@ -43,7 +40,7 @@ export default class Card {
       this._handleCardClick(this._name, this._link);
     });
 
-    this._buttonLikeCard().addEventListener('click', () => {
+    this._buttonLikeCard.addEventListener('click', () => {
       this._handleLikeCard();
     });
 
