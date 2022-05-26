@@ -13,7 +13,10 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src='./images/profile-avatar.jpg' alt="Аватар профиля">
+        <div class="profile__avatar-section">
+          <img class="profile__avatar" src='./images/profile-avatar.jpg' alt="Аватар профиля">
+          <button class="profile__change-button" type="button"></button>
+        </div>
         <div class="profile__info">
           <div class="profile__edit">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -77,6 +80,34 @@
       </div>
     </section>
 
+    <!--Всплывающее окно с сообщением об удалении карточки-->
+    <section class="popup popup_function_delete-photo">
+      <div class="popup__container popup__container_function_delete-photo">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title popup__title_function_delete-photo">Вы уверены?</h2>
+        <form class="popup__form" name="confirm-deletion">
+          <fieldset class="popup__input-area">
+            <button class="popup__submit-btn popup__submit-btn_function_delete-photo" type="submit">Да</button>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+
+    <!--Всплывающее окно с формой для обновления аватара-->
+    <section class="popup popup_function_change-avatar">
+      <div class="popup__container popup__container_function_change-avatar">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" name="update-avatar" novalidate>
+          <fieldset class="popup__input-area">
+            <input id="avatar-input" type="url" class="popup__input popup__input_avatar_link" placeholder="Ссылка на аватар" name="url" required>
+            <span id="avatar-input-error" class="popup__input-error"></span>
+            <button class="popup__submit-btn" type="submit">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+
   </div>
 
   <!--Шаблон для заполнения фотоальбома через функции JavaScript-->
@@ -86,7 +117,10 @@
       <button class="card__delete-button" type="button"></button>
       <div class="card__description">
         <h2 class="card__place"></h2>
-        <button class="card__like-button" type="button"></button>
+        <div class="card__like-section">
+          <button class="card__like-button" type="button"></button>
+          <p class="card__like-counter"></p>
+        </div>
       </div>
     </li>
   </template>

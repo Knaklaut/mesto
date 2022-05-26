@@ -3,6 +3,7 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
+
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__edit/profile__edit.css);
@@ -11,6 +12,9 @@
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__change-button/profile__change-button.css);
+@import url(../blocks/profile/__avatar-section/profile__avatar-section.css);
+
 @import url(../blocks/photobook/photobook.css);
 @import url(../blocks/photobook/__elements/photobook__elements.css);
 @import url(../blocks/card/card.css);
@@ -20,11 +24,15 @@
 @import url(../blocks/card/__delete-button/card__delete-button.css);
 @import url(../blocks/card/__like-button/card__like-button.css);
 @import url(../blocks/card/__like-button/_active/card__like-button_active.css);
+@import url(../blocks/card/__like-counter/card__like-counter.css);
+@import url(../blocks/card/__like-section/card__like-section.css);
+
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/_function/popup_function_increase-photo.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__title/_function/popup__title_function_delete-photo.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input-area/popup__input-area.css);
@@ -34,8 +42,12 @@
 @import url(../blocks/popup/__input-error/_active/popup__input-error_active.css);
 @import url(../blocks/popup/__submit-btn/popup__submit-btn.css);
 @import url(../blocks/popup/__submit-btn/_inactive/popup__submit-btn_inactive.css);
+@import url(../blocks/popup/__submit-btn/_function/popup__submit-btn_function_delete-photo.css);
 @import url(../blocks/popup/__elements/popup__elements.css);
 @import url(../blocks/popup/__photo/popup__photo.css);
 @import url(../blocks/popup/__photo-title/popup__photo-title.css);
+@import url(../blocks/popup/__container/_function/popup__container_function_change-avatar.css);
+@import url(../blocks/popup/__container/_function/popup__container_function_delete-photo.css);
+
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

@@ -1,0 +1,8 @@
+.profile__avatar-section {
+  position: relative;
+  margin-right: 30px;
+}
+
+.profile__avatar-section:hover .profile__change-button {
+  display: block;
+}

@@ -1,9 +1,10 @@
 // Класс UserInfo описывает функциональность, необходимую для корректного отображения пользовательских данных на странце
 
 export default class UserInfo {
-  constructor({ selectorName, selectorAbout }) {
+  constructor({ selectorName, selectorAbout, selectorAvatar }) {
     this._name =  document.querySelector(selectorName);
     this._about = document.querySelector(selectorAbout);
+    this._avatar = document.querySelector(selectorAvatar);
   }
 
   // Метод getUserInfo возвращает объект с пользовательскими данными
@@ -15,8 +16,18 @@ export default class UserInfo {
   }
 
   // Метод setUserInfo принимает обновленные пользовательские данные
-  setUserInfo(userName, userAbout) {
+  setUserInfo({ userName, userAbout }) {
     this._name.textContent = userName;
-    this._about.textContent = userAbout
+    this._about.textContent = userAbout;
+  }
+
+  // Метод setUserAvatar устанавливает новый аватар из источника, определенного пользователем
+  setUserAvatar({ userAvatarSource }) {
+    this._avatar.src = userAvatarSource;
+  }
+
+  // Метод saveUserId запоминает идентификатор данного пользователя, используется при обработке данных
+  saveUserId(userId) {
+    this._userId = userId;
   }
 }

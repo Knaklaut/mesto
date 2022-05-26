@@ -13,56 +13,30 @@ const validationObj = {
 const identificationObj = {
   popupUserProfile: '.popup_function_user-info',
   popupForAddingPhoto: '.popup_function_add-place',
+  popupForChangingAvatar: '.popup_function_change-avatar',
+  popupForConfirmingDeletion: '.popup_function_delete-photo',
+  popupPhoto: '.popup_function_increase-photo',
+  profileAvatar: '.profile__avatar',
   profileName: '.profile__title',
   profileAbout: '.profile__subtitle',
-  popupPhoto: '.popup_function_increase-photo',
   elementsContainer: '.photobook__elements',
   elementRef: '#card',
+  buttonForDeletingPhoto: '.card__delete-button',
 };
 
-// Массив с начальным набором карточек для загрузки на страницу
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // Определение ключевых переменных
-const container = document.querySelector(".content");
-const popupProfile = document.querySelector('.popup_function_user-info');
-const popupCards = document.querySelector('.popup_function_add-place');
-const buttonEdit = container.querySelector(".profile__edit-button");
-const buttonAddPhoto = container.querySelector(".profile__add-button");
-const inputName = popupProfile.querySelector('.popup__input_el_name');
-const inputAbout = popupProfile.querySelector('.popup__input_el_about');
+const container = document.querySelector('.content');
+const buttonEdit = container.querySelector('.profile__edit-button');
+const buttonAddPhoto = container.querySelector('.profile__add-button');
+const buttonChangeAvatar = container.querySelector('.profile__change-button');
+const popupUserInfo = document.querySelector('.popup_function_user-info');
+const popupUserInfoForm = popupUserInfo.querySelector('.popup__form');
 
 export {
   validationObj,
   identificationObj,
-  initialCards,
   buttonEdit,
   buttonAddPhoto,
-  inputName,
-  inputAbout
+  buttonChangeAvatar,
+  popupUserInfoForm
 };

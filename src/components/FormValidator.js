@@ -28,9 +28,9 @@ export default class FormValidator {
   }
 
   // Метод hasInvalidInput принимает массив полей input формы и возвращает true, если хотя бы одно поле не является валидным
-  _hasInvalidInput(inputs) {
-    return inputs.some(inputEl => {
-      return !inputEl.validity.valid;
+  _hasInvalidInput() {
+    return this._inputs.some(input => {
+      return !input.validity.valid;
     });
   }
 
@@ -75,9 +75,6 @@ export default class FormValidator {
 
   // Метод resetValidation сбрасывает результаты валидации
   resetValidation() {
-    const form = this._formEl.querySelector(this._formSelector);
-    this._inputs = Array.from(form.querySelectorAll(this._inputSelector));
-    this._button = form.querySelector(this._submitButtonSelector);
     this._toggleButtonState();
     this._inputs.forEach((input) => {
       this._hideInputError(input);
