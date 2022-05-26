@@ -11,6 +11,8 @@
 .profile__edit-button{background-color:transparent;background-image:url(images/button-edit.6c7bf05444b9793fdf6e.svg);background-position:50%;background-repeat:no-repeat;background-size:10px;border:1px solid #fff;box-sizing:border-box;min-height:24px;min-width:24px;padding:0;transition:opacity .4s ease-in-out}.profile__edit-button:hover{cursor:pointer;opacity:.6}@media screen and (max-width:620px){.profile__edit-button{background-size:7.5px;margin-left:10px;min-height:18px;min-width:18px}}
 .profile__add-button{background-color:transparent;background-image:url(images/button-add.bed8c136e13907f5eefb.svg);background-position:50%;background-repeat:no-repeat;background-size:22px;border:2px solid #fff;border-radius:2px;height:50px;margin-left:15px;padding:0;transition:opacity .4s ease-in-out;width:150px}.profile__add-button:hover{cursor:pointer;opacity:.6}@media screen and (max-width:620px){.profile__add-button{background-size:17px;margin-left:0;width:282px}}
 .profile__avatar{border-radius:100%;margin-right:30px;max-width:120px}@media screen and (max-width:620px){.profile__avatar{margin:0 auto 22.25px}}
+.profile__avatar-section{position:relative}.profile__avatar-section:hover .profile__change-button{display:block}
+.profile__change-button{background-color:transparent;background-image:url(images/button-change.a086f758840ae814ecde.svg);background-position:50%;background-repeat:no-repeat;background-size:26px 26px;border:none;border-radius:100%;display:none;left:0;max-width:120px;position:absolute;top:0}
 .photobook{margin:51px auto 66px;max-width:880px}@media screen and (max-width:620px){.photobook{margin-bottom:48px;margin-top:0}}
 .photobook__elements{display:grid;gap:20px 17px;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(auto,1fr);justify-items:center;list-style:none;margin:0 auto;padding-left:0;width:100%}@media screen and (max-width:890px){.photobook__elements{grid-template-columns:repeat(2,1fr)}}@media screen and (max-width:620px){.photobook__elements{grid-template-columns:1fr}}
 .card{background-color:#fff;border-radius:10px;min-height:361px;position:relative;width:282px}
@@ -18,13 +20,16 @@
 .card__description{align-items:center;bottom:0;display:flex;justify-content:space-between;margin:25px 15px 31px 21px;width:246px}
 .card__place{color:#000;font-family:Inter,Arial,sans-serif;font-size:24px;font-weight:900;line-height:1.21;margin:0;max-width:80%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .card__delete-button{background-color:transparent;background-image:url(images/button-delete.823b0cf1b0b7e9cb7cad.svg);background-repeat:no-repeat;border:none;cursor:pointer;height:19px;padding:0;position:absolute;right:20px;top:20px;transition:opacity .4s ease-in-out;width:18px;z-index:1}.card__delete-button:hover{opacity:.5}
-.card__like-button{background-color:transparent;background-image:url(images/button-like.0e390048c288271ab07f.svg);background-repeat:no-repeat;border:none;cursor:pointer;height:19px;padding:0;transition:opacity .4s ease-in-out;width:22px}.card__like-button:hover{opacity:.5}
+.card__like-button{align-self:flex-start;background-color:transparent;background-image:url(images/button-like.0e390048c288271ab07f.svg);background-repeat:no-repeat;border:none;cursor:pointer;height:19px;padding:0;transition:opacity .4s ease-in-out;width:22px}.card__like-button:hover{opacity:.5}
 .card__like-button_active{background-color:transparent;background-image:url(images/button-like-active.e787eeb70bb65b7b453a.svg);background-repeat:no-repeat;height:19px;width:22px}
+.card__like-counter{color:#000;font-family:Inter,Arial,sans-serif;font-size:13px;font-weight:400;line-height:1.21;margin:3px 0 0}
+.card__like-section{align-items:center;display:flex;flex-direction:column;justify-content:flex-start}
 .popup{align-items:center;background-color:rgba(0,0,0,.5);display:flex;height:100%;justify-content:center;left:0;opacity:0;position:fixed;top:0;transition:visibility .2s,opacity .4s ease-in-out;visibility:hidden;width:100%;z-index:2}
 .popup_opened{opacity:1;visibility:visible}
 .popup_function_increase-photo{background-color:rgba(0,0,0,.9)}
 .popup__container{background-color:#fff;border-radius:10px;box-shadow:0 0 25px 0 rgba(0,0,0,.15);min-height:330px;position:relative;width:430px}@media screen and (max-width:620px){.popup__container{min-height:322px;width:282px}}
 .popup__title{color:#000;font-family:Inter,Arial,sans-serif;font-size:24px;font-weight:900;line-height:1.21;margin:34px 64px 44px 36px}@media screen and (max-width:620px){.popup__title{font-size:18px;margin:25px 22px 70px}}
+.popup__title_function_delete-photo{margin:34px 36px 38px}
 .popup__close{background-color:transparent;background-image:url(images/close-icon.039f1f5203f653b4bacd.svg);background-repeat:no-repeat;background-size:32px;border:none;cursor:pointer;height:32px;padding:0;position:absolute;right:-40px;top:-40px;transition:opacity .4s ease-in-out;width:32px}.popup__close:hover{opacity:.6}@media screen and (max-width:620px){.popup__close{background-size:20px;height:20px;right:0;top:-36px;width:20px}}
 .popup__form{display:flex;flex-direction:column}
 .popup__input-area{border:none;margin:0 auto;padding:0;width:358px}@media screen and (max-width:620px){.popup__input-area{width:238px}}
@@ -34,6 +39,7 @@
 .popup__input-error_active{display:flex}
 .popup__submit-btn{background-color:#000;border:none;border-radius:2px;box-sizing:border-box;color:#fff;font-size:18px;font-style:inherit;line-height:1.22;margin:46px 0 0;min-height:50.15px;padding:0;text-align:center;transition:background-color .3s ease-in;width:100%}.popup__submit-btn:hover{background-color:rgba(0,0,0,.8);cursor:pointer}@media screen and (max-width:620px){.popup__submit-btn{font-size:14px;margin:36px 0 0;min-height:40px}}
 .popup__submit-btn_inactive{background-color:#e5e5e5;border:1px solid #000;color:#000;opacity:.2}.popup__submit-btn_inactive:hover{background-color:#e5e5e5;cursor:default}
+.popup__submit-btn_function_delete-photo{margin:0}
 .popup__elements{position:relative}
 .popup__photo{max-height:75vh;max-width:75vw}
 .popup__photo-title{align-self:flex-start;font-size:12px;font-weight:400;line-height:1.25;margin:0;padding:0}
