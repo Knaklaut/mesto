@@ -26,10 +26,6 @@ export default class PopupWithForm extends Popup {
     return this._formData;
   }
 
-  getFormData() {
-    return this._getInputValues();
-  }
-
   //Метод saveData изменяет текст кнопки формы в зависимости от статуса загрузки данных на сервер
   saveData(saving) {
     if(saving) {

@@ -45,11 +45,11 @@ export default class Card {
 
   _checkCurrentUserLikes() {
     return this._likes.some(item => {
-      item._id === this._currentUserId
+      item._id === this._userId
     });
   }
 
-  handleDeleteCard() {
+  removeCard() {
     this._element.remove();
     this._element = null;
   }

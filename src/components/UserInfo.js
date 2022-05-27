@@ -25,9 +25,4 @@ export default class UserInfo {
   setUserAvatar({ userAvatarSource }) {
     this._avatar.src = userAvatarSource;
   }
-
-  // Метод saveUserId запоминает идентификатор данного пользователя, используется при обработке данных
-  saveUserId(userId) {
-    this._userId = userId;
-  }
 }

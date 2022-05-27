@@ -10,6 +10,9 @@ import {
   popupUserInfoForm
 } from "../utils/constants.js";
 
+// Создание переменной для хранения id пользователя
+let userId;
+
 // Импортирование классов
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
@@ -36,7 +39,20 @@ const popupWithImage = new PopupWithImage(identificationObj.popupPhoto);
 popupWithImage.setEventListeners();
 
 // Создание экземпляра класса PopupWithForm для формы с пользовательскими данными и добавление слушателя событий
-const popupUserInfo = new PopupWithForm(identificationObj.popupUserProfile, handleUserInfo);
+const popupUserInfo = new PopupWithForm(identificationObj.popupUserProfile, data => {
+  popupUserInfo.saveData(true);
+  api.updateUserInfo({ name: data.userName, about: data.userAbout })
+  .then(res => {
+    userInfo.setUserInfo({ userName: res.name, userAbout: res.about });
+    popupUserInfo.close();
+  })
+  .catch(err => {
+    console.log(err);
+  })
+  .finally(() => {
+    popupUserInfo.saveData(false);
+  })
+});
 popupUserInfo.setEventListeners();
 
 // Создание экземпляра класса PopupWithForm для формы с данными новой фотографии и добавление слушателя событий
@@ -44,7 +60,20 @@ const popupForAddingCards = new PopupWithForm(identificationObj.popupForAddingPh
 popupForAddingCards.setEventListeners();
 
 // Создание экземпляра класса PopupWithForm для формы редактирования аватара
-const popupFormChangeAvatar = new PopupWithForm(identificationObj.popupForChangingAvatar, handleEditAvatar);
+const popupFormChangeAvatar = new PopupWithForm(identificationObj.popupForChangingAvatar, data => {
+  popupFormChangeAvatar.saveData(true);
+  api.changeAvatar({ avatar: data.url })
+  .then(res => {
+    userInfo.setUserAvatar({ userAvatarSource: res.avatar });
+    popupFormChangeAvatar.close();
+  })
+  .catch(err => {
+    console.log(err);
+  })
+  .finally(() => {
+    popupFormChangeAvatar.saveData(false);
+  })
+});
 popupFormChangeAvatar.setEventListeners();
 
 // Создание экземпляра класса PopupWithNotice для подтверждения удаления карточки из альбома и добавление слушателя событий
@@ -81,33 +110,16 @@ const api = new Api({
 api.getInitialData()
   .then(initialData => {
     const [cardData, userData] = initialData;
-    userInfo.saveUserId(userData._id);
+    userId = userData._id;
     userInfo.setUserInfo({ userName: userData.name, userAbout: userData.about });
     userInfo.setUserAvatar({ userAvatarSource: userData.avatar });
-    cardList.renderItems(cardData);
+    cardList.renderItems(cardData, userId);
   })
   .catch(err => {
     console.log(err);
   });
 
 // Создание ключевых функций
-
-// Функция для редактирования пользовательских данных
-function handleUserInfo() {
-  popupUserInfo.saveData(true);
-  const formData = popupUserInfo.getFormData();
-  api.updateUserInfo({ name: formData.userName, about: formData.userAbout })
-  .then(res => {
-    userInfo.setUserInfo({ userName: res.name, userAbout: res.about });
-    popupUserInfo.close();
-  })
-  .catch(err => {
-    console.log(err);
-  })
-  .finally(() => {
-    popupUserInfo.saveData(false);
-  })
-}
 
 // Функция для заполнения полей формы с пользовательскими данными информацией из профиля
 function handleProfileData() {
@@ -116,26 +128,9 @@ function handleProfileData() {
   popupUserInfoForm.userAbout.value = userInfoReceived.userAbout;
 }
 
-// Функция для редактирования аватара пользователя
-function handleEditAvatar() {
-  popupFormChangeAvatar.saveData(true);
-  const formData = popupFormChangeAvatar.getFormData();
-  api.changeAvatar({ avatar: formData.url })
-  .then(res => {
-    userInfo.setUserAvatar({ userAvatarSource: res.avatar });
-    popupFormChangeAvatar.close();
-  })
-  .catch(err => {
-    console.log(err);
-  })
-  .finally(() => {
-    popupFormChangeAvatar.saveData(false);
-  })
-}
-
 // Функция для создания карточки с фотографией
-function createCard(newCard, id) {
-  const card = new Card({ data: newCard, handleCardClick, handleDeleteCard, handleLikeCard }, identificationObj.elementRef, id);
+function createCard(newCard, userId) {
+  const card = new Card({ data: newCard, handleCardClick, handleDeleteCard, handleLikeCard }, identificationObj.elementRef, userId);
   return card.generateCard();
 }
 
@@ -193,9 +188,9 @@ function handleDeleteCard(id, card) {
 
 // Функция для удаления карточки при подтверждении действия во всплывающем окне
 function handleConfirmDeletion(id, card) {
-  api.removeCard(id)
+  api.deleteCard(id)
   .then(() => {
-    card.handleDeleteCard();
+    card.removeCard();
     popupWithNotice.close();
   })
   .catch((err) => {

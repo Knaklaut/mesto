@@ -5,7 +5,6 @@ export default class PopupWithNotice extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
     this._popupForm = this._popupEl.querySelector('.popup__form');
-    this._button = this._popupForm.querySelector('.popup__submit-btn');
   }
 
   // Метод confirmDeletion устанавливает правило для подтверждения удаления карточки
@@ -16,7 +15,7 @@ export default class PopupWithNotice extends Popup {
   // Метод setEventListeners расширяет родительский метод для обработки действия при нажатии на кнопку подтверждения
   setEventListeners() {
     super.setEventListeners();
-    this._button.addEventListener('submit', (evt) => {
+    this._popupForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._confirmDeletionCallback();
     });
