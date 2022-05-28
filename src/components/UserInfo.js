@@ -25,4 +25,14 @@ export default class UserInfo {
   setUserAvatar({ userAvatarSource }) {
     this._avatar.src = userAvatarSource;
   }
+
+  // Метод storeUserId сохраняет id пользователя на этапе получения начальных данных
+  storeUserId(userId) {
+    this._userId = userId;
+  }
+
+  // Метод returnUserId возвращает сохраненный id пользователя при создании новой карточки
+  returnUserId() {
+    return this._userId;
+  }
 }

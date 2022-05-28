@@ -1,6 +1,6 @@
 // Класс Card создает стандартную карточку со ссылкой на изображение и подписью
 export default class Card {
-  constructor({ data, handleCardClick, handleLikeCard, handleDeleteCard }, cardSelector, userId) {
+  constructor({ data, userId, handleCardClick, handleLikeCard, handleDeleteCard }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._ownerId = data.owner._id;

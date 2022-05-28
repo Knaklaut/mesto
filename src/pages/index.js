@@ -10,9 +10,6 @@ import {
   popupUserInfoForm
 } from "../utils/constants.js";
 
-// Создание переменной для хранения id пользователя
-let userId;
-
 // Импортирование классов
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
@@ -110,10 +107,10 @@ const api = new Api({
 api.getInitialData()
   .then(initialData => {
     const [cardData, userData] = initialData;
-    userId = userData._id;
+    userInfo.storeUserId(userData._id);
     userInfo.setUserInfo({ userName: userData.name, userAbout: userData.about });
     userInfo.setUserAvatar({ userAvatarSource: userData.avatar });
-    cardList.renderItems(cardData, userId);
+    cardList.renderItems(cardData);
   })
   .catch(err => {
     console.log(err);
@@ -129,8 +126,8 @@ function handleProfileData() {
 }
 
 // Функция для создания карточки с фотографией
-function createCard(newCard, userId) {
-  const card = new Card({ data: newCard, handleCardClick, handleDeleteCard, handleLikeCard }, identificationObj.elementRef, userId);
+function createCard(newCard) {
+  const card = new Card({ data: newCard, userId: userInfo.returnUserId(), handleCardClick, handleDeleteCard, handleLikeCard }, identificationObj.elementRef);
   return card.generateCard();
 }
 
